@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+        >
+
+<body>
+
+      		 <div class="span12">
+
+						<!-- BEGIN SAMPLE FORM PORTLET-->   
+
+						<div class="portlet box blue">
+
+							<div class="portlet-title">
+
+								<div class="caption"><i class="icon-reorder"></i>用户</div>
+
+								<div class="tools">
+
+									<a href="javascript:;" class="collapse"></a>
+
+
+								</div>
+
+							</div>
+
+							<div class="portlet-body form">
+
+								<!-- BEGIN FORM-->
+
+								<form action="user_list.html" th:action="@{/sys/user/createOrUpdate}" class="form-horizontal" method="post" th:object="${user}">
+								
+ 									<input type="hidden"  th:field="*{id}" />
+ 									
+									<div class="control-group" th:classappend="${#fields.hasErrors('username')} ? error">
+
+										<label class="control-label">用户邮箱</label>
+
+										<div class="controls">
+
+											<input type="text" class="span6 m-wrap" th:field="*{username}"/>
+
+											<span class="help-inline" th:errors="*{username}">Some hint here</span>
+
+										</div>
+
+									</div>
+									
+									<div class="control-group" th:classappend="${#fields.hasErrors('pass')} ? error">
+
+										<label class="control-label">密码</label>
+
+										<div class="controls">
+
+											<input type="password" class="span6 m-wrap" th:field="*{pass}"/>
+
+											<span class="help-inline" th:errors="*{pass}">Some hint here</span>
+
+										</div>
+
+									</div>
+
+
+									<div class="form-actions">
+
+										<button type="submit" class="btn blue" th:text="提交">Submit</button>
+
+										<button type="button" class="btn" th:text="取消">Cancel</button>                            
+
+									</div>
+
+								</form>
+
+								<!-- END FORM-->       
+
+							</div>
+
+						</div>
+
+						<!-- END SAMPLE FORM PORTLET-->
+            
+		</div>
+	
+
+	
+</body>
+</html>

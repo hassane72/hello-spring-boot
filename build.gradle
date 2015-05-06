@@ -1,0 +1,56 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.3.RELEASE'
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://repo.spring.io/release" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('org.springframework:springloaded:1.2.1.RELEASE')
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'war'
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+}
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.codehaus.groovy:groovy:2.4.3")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-aop")
+    compile("org.springframework.boot:spring-boot-starter-mail")
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    compile 'mysql:mysql-connector-java:5.1.31'
+    compile("log4j:log4j:1.2.17")
+    testCompile("junit:junit")
+    compile 'com.google.guava:guava:14.0'
+    compile 'org.apache.commons:commons-lang3:3.2.1'
+    compile 'commons-codec:commons-codec:1.6'
+    compile 'org.atmosphere:atmosphere-runtime:2.3.0'
+    compile 'org.webjars:atmosphere-javascript:2.2.8'
+    compile 'javax.inject:javax.inject:1'
+    compile 'org.atmosphere:atmosphere-spring:2.1.0'
+    compile 'com.google.code.gson:gson:2.3'
+
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
