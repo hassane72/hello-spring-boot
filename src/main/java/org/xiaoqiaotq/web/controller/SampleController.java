@@ -6,6 +6,9 @@ import org.atmosphere.cpr.AtmosphereServlet;
 import org.atmosphere.cpr.BroadcasterFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.MailException;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +17,8 @@ import org.xiaoqiaotq.domain.User;
 import org.xiaoqiaotq.web.messageService.Message;
 
 import javax.inject.Inject;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
@@ -30,9 +35,10 @@ public class SampleController {
 
     @Autowired
     Book book;
+    @Autowired
+    JavaMailSender javaMailSender;
 
-
-    @RequestMapping(value = "/aada")
+    @RequestMapping(value = "/aadda")
     public String hello(){
         System.err.println("dsfsdf" +
                 "sdfsdfdsf杀毒发");
@@ -92,7 +98,26 @@ public class SampleController {
 
     }
     @RequestMapping("/senEmail")
-    public void senEmail(){
+    public String senEmail(){
+        MimeMessagePreparator preparator = new MimeMessagePreparator() {
 
+            public void prepare(MimeMessage mimeMessage) throws Exception {
+
+                mimeMessage.setRecipient(javax.mail.Message.RecipientType.TO,
+                        new InternetAddress("843036893@qq.com"));
+                mimeMessage.setFrom(new InternetAddress("javamail123@126.com"));
+                mimeMessage.setText("下班了");
+            }
+        };
+
+        try {
+            this.javaMailSender.send(preparator);
+            return "send success";
+        }
+        catch (MailException ex) {
+            // simply log it and go on...
+            System.err.println (ex.getMessage());
+            return "send failure";
+        }
     }
 }
