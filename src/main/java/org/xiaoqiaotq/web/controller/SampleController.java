@@ -10,6 +10,7 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.xiaoqiaotq.domain.Book;
@@ -32,9 +33,8 @@ public class SampleController {
 
     @Value("${asdf}")
     String hello;
-
     @Autowired
-    Book book;
+    Book book =new Book("concurrency aa");
     @Autowired
     JavaMailSender javaMailSender;
 
@@ -66,6 +66,7 @@ public class SampleController {
 
     @RequestMapping("/testProps")
     public Book book() {
+        book.setPrice(3);
         return book;
     }
 
@@ -119,5 +120,11 @@ public class SampleController {
             System.err.println (ex.getMessage());
             return "send failure";
         }
+    }
+
+    @RequestMapping("/testBean")
+    public Book testBean(@RequestBody Book book) {
+        book.setAuthor("wang");
+        return book;
     }
 }

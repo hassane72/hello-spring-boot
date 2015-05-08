@@ -14,6 +14,14 @@ public class Book {
     private double price;
     private String author;
 
+    public Book() {
+    }
+
+    public Book(String name) {
+
+        this.name = name;
+    }
+
     public Map<String, String> getAttributes() {
         return attributes;
     }
