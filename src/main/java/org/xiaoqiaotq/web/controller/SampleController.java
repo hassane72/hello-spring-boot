@@ -64,7 +64,7 @@ public class SampleController {
         return System.getProperties();
     }
 
-    @RequestMapping("/testProps")
+    @RequestMapping("/testProp")
     public Book book() {
         book.setPrice(3);
         return book;
