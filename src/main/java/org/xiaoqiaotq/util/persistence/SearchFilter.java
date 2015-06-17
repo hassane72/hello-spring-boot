@@ -51,7 +51,7 @@ public class SearchFilter {
 //			if (names.length != 2) {
 //				throw new IllegalArgumentException(key + " is not a valid search filter name");
 //			}
-			String filedName = names[1];
+	    		String filedName = names[1];
 			Operator operator = Operator.valueOf(names[0]);
 			//add param type resolve
 			if(names.length == 3){
