@@ -7,8 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.xiaoqiaotq.web.servlet.MyServlet;
 import org.xiaoqiaotq.web.servlet.SecondServlet;
 
@@ -16,14 +20,19 @@ import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by wang on 2015/4/27.
  */
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer{
+    public static ApplicationContext context;
+    public static Map map=new HashMap();
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        ConfigurableApplicationContext run = SpringApplication.run(Application.class, args);
+        context=run;
     }
     @Bean
     public ServletRegistrationBean delegateServiceExporterServlet() {
