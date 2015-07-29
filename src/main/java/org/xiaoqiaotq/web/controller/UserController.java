@@ -12,6 +12,7 @@ import org.xiaoqiaotq.service.UserService;
 import org.xiaoqiaotq.util.Servlets;
 
 import javax.servlet.ServletRequest;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.Map;
@@ -30,6 +31,7 @@ public class UserController {
 
 
     @RequestMapping("/home")
+    @Transactional
     public String home(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
                        @RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
                        @RequestParam(value = "sortType", defaultValue = "auto") String sortType, Model model,
