@@ -9,5 +9,5 @@ import org.xiaoqiaotq.domain.ManyToMany.Employee;
  * date  : 2015/7/3.
  */
 @Repository
-public interface EmployeeRepository extends CrudRepository<Employee,Long> {
+public interface EmployeeRepository extends CrudRepository<Employee,Long>,EmployeeRepositoryCustom {
 }

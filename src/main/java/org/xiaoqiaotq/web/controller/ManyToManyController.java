@@ -42,10 +42,18 @@ public class ManyToManyController {
         projectRepository.save(project);
         return  project;
     }
-    @RequestMapping("/findOne/{id}")
-    public Project findOne(@PathVariable("id") long id){
+    @RequestMapping("/findProject/{id}")
+    public Project findOne1(@PathVariable("id") long id){
         System.err.println("hello ");
         Project one = projectRepository.findOne(id);
+        return one;
+    }
+    @RequestMapping("/findEmployee/{id}")
+    public Employee findOne2(@PathVariable("id") long id){
+        System.err.println("hello ");
+        Employee one = employeeRepository.findOne(id);
+        boolean exitsName = employeeRepository.exitsName("dsfdsf", id);
+        System.err.println(exitsName);
         return one;
     }
 

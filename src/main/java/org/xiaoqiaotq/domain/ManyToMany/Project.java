@@ -1,5 +1,6 @@
 package org.xiaoqiaotq.domain.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.xiaoqiaotq.domain.BaseEntity;
 
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ import java.util.Set;
 public class Project extends BaseEntity {
     private String name;
     @ManyToMany
+    @JsonManagedReference
     private Set<Employee> employees=new HashSet<>();
 
     public Set<Employee> getEmployees() {

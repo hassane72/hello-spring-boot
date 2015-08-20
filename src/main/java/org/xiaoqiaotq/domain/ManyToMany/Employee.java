@@ -1,5 +1,6 @@
 package org.xiaoqiaotq.domain.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.xiaoqiaotq.domain.BaseEntity;
 
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ public class Employee extends BaseEntity {
     private String name;
 
     @ManyToMany(mappedBy = "employees")
+    @JsonBackReference
     private Set<Project> projects=new HashSet<>();
     public String getName() {
         return name;

@@ -6,6 +6,7 @@ import org.atmosphere.cpr.AtmosphereServlet;
 import org.atmosphere.cpr.BroadcasterFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.xiaoqiaotq.Application;
 import org.xiaoqiaotq.domain.Book;
 import org.xiaoqiaotq.domain.User;
 import org.xiaoqiaotq.web.messageService.Message;
@@ -22,6 +24,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.Collection;
 import java.util.Enumeration;
 
@@ -126,5 +129,21 @@ public class SampleController {
     public Book testBean(@RequestBody Book book) {
         book.setAuthor("wang");
         return book;
+    }
+    @RequestMapping("/writeFile")
+    public String writeFile(String input) {
+        System.err.println(this);
+        File file=new File("./aa/bb");
+        file.mkdirs();
+        return "success";
+    }
+
+    @RequestMapping("/getApplicationContext")
+    public String getApplicationContext() {
+        ApplicationContext context = Application.context;
+        Object userService = context.getBean("userService");
+        System.err.println(context);
+        System.err.println(userService);
+        return "success";
     }
 }
