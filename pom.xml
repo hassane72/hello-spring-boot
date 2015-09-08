@@ -138,6 +138,7 @@
                 <version>0.1.10</version>
                 <configuration>
                     <thriftExecutable>D:\thrift.exe</thriftExecutable>
+                    <outputDirectory>src/main/generated-sources</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>

@@ -46,6 +46,7 @@ public class ManyToManyController {
     public Project findOne1(@PathVariable("id") long id){
         System.err.println("hello ");
         Project one = projectRepository.findOne(id);
+        one.getEmployees();
         return one;
     }
     @RequestMapping("/findEmployee/{id}")

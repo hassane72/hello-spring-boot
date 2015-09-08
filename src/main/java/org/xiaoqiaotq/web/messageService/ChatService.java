@@ -6,11 +6,11 @@ import org.atmosphere.config.managed.Encoder;
 import org.atmosphere.config.service.Disconnect;
 import org.atmosphere.config.service.ManagedService;
 import org.atmosphere.config.service.Ready;
-import org.atmosphere.cpr.AtmosphereResource;
-import org.atmosphere.cpr.AtmosphereResourceEvent;
-import org.atmosphere.cpr.BroadcasterFactory;
+import org.atmosphere.cpr.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.xiaoqiaotq.service.UserService;
 
 import javax.inject.Inject;
 import java.io.IOException;
@@ -23,10 +23,14 @@ public class ChatService {
 	@Inject
 	BroadcasterFactory broadcasterFactory;
 
+	@Autowired
+	private UserService userService;
+
 	@Ready
 	public void onReady(final AtmosphereResource resource) {
 		System.err.println(this);
 		System.err.println(broadcasterFactory);
+		broadcasterFactory.lookup(DefaultBroadcaster.class,"zhsan", true);
 		this.logger.info("Connected", resource.uuid());
 	}
 

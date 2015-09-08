@@ -94,7 +94,6 @@ public class SampleController {
         Gson gson = new Gson();
         Message message=new Message();
         message.setAuthor("zhsandddss");
-        message.setTime(21231313131l);
         message.setMessage("hello faaffffff");
         atmosphereFramework.metaBroadcaster().broadcastTo("/", gson.toJson(message), true);
         System.err.println("broa  dcast : " + atmosphereFramework.getBroadcasterFactory().lookupAll());

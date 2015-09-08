@@ -3,10 +3,7 @@ $(function() {
 
 	var header = $('#header');
 	var content = $('#content');
-	var input = $('#input');
 	var status = $('#status');
-	var myName = false;
-	var author = null;
 	var logged = false;
 	var socket = atmosphere;
 	var subSocket;
@@ -26,7 +23,6 @@ $(function() {
 		content.html($('<p>', {
 			text : 'Atmosphere connected using ' + response.transport
 		}));
-		input.removeAttr('disabled').focus();
 		status.text('Choose name:');
 		transport = response.transport;
 
@@ -43,21 +39,12 @@ $(function() {
 							text : 'Client closed the connection after a timeout. Reconnecting in '
 									+ request.reconnectInterval
 						}));
-		subSocket
-				.push(atmosphere.util
-						.stringifyJSON({
-							author : author,
-							message : 'is inactive and closed the connection. Will reconnect in '
-									+ request.reconnectInterval
-						}));
-		input.attr('disabled', 'disabled');
 		setTimeout(function() {
 			subSocket = socket.subscribe(request);
 		}, request.reconnectInterval);
 	};
 
 	request.onReopen = function(response) {
-		input.removeAttr('disabled').focus();
 		content.html($('<p>', {
 			text : 'Atmosphere re-connected using ' + response.transport
 		}));
@@ -86,18 +73,7 @@ $(function() {
 			console.log('This doesn\'t look like a valid JSON: ', message);
 			return;
 		}
-
-		input.removeAttr('disabled').focus();
-		if (!logged && myName) {
-			logged = true;
-			status.text(myName + ': ').css('color', 'blue');
-		} else {
-			var me = json.author == author;
-			var date = typeof (json.time) == 'string' ? parseInt(json.time)
-					: json.time;
-			addMessage(json.author, json.message, me ? 'blue' : 'black',
-					new Date(date));
-		}
+		console.log(message);
 	};
 
 	request.onClose = function(response) {
@@ -110,7 +86,6 @@ $(function() {
 				message : 'disconnecting'
 			}));
 		}
-		input.attr('disabled', 'disabled');
 	};
 
 	request.onError = function(response) {
@@ -126,22 +101,7 @@ $(function() {
 			text : 'Connection lost, trying to reconnect. Trying to reconnect '
 					+ request.reconnectInterval
 		}));
-		input.attr('disabled', 'disabled');
 	};
 
 	subSocket = socket.subscribe(request);
-
-
-	function addMessage(author, message, color, datetime) {
-		content.append('<p><span style="color:'
-				+ color
-				+ '">'
-				+ author
-				+ '</span> @ '
-				+ +(datetime.getHours() < 10 ? '0' + datetime.getHours()
-						: datetime.getHours())
-				+ ':'
-				+ (datetime.getMinutes() < 10 ? '0' + datetime.getMinutes()
-						: datetime.getMinutes()) + ': ' + message + '</p>');
-	}
 });

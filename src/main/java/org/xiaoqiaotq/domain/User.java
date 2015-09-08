@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -21,11 +22,12 @@ import java.util.Date;
 @Table(name="t_user")
 public class User extends BaseEntity{
     @NotNull
-    @Email
+    @Email(message = "{aa}")
     private String username;
 
 
     @NotNull
+    @Size(min = 5)
     private String pass;
 
     private String photo;

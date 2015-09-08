@@ -1,5 +1,8 @@
 package org.xiaoqiaotq;
 
+import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.protocol.TProtocolFactory;
+import org.apache.thrift.server.TServlet;
 import org.atmosphere.cpr.AtmosphereServlet;
 import org.atmosphere.cpr.ContainerInitializer;
 import org.springframework.boot.SpringApplication;
@@ -13,8 +16,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.xiaoqiaotq.cluster.HelloServiceHandler;
 import org.xiaoqiaotq.web.servlet.MyServlet;
 import org.xiaoqiaotq.web.servlet.SecondServlet;
+import service.demo.Hello;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
@@ -68,5 +73,19 @@ public class Application extends SpringBootServletInitializer{
             onStartup(Collections.<Class<?>> emptySet(), servletContext);
         }
 
+    }
+    @Bean
+    public TProtocolFactory tProtocolFactory() {
+        return new TBinaryProtocol.Factory();
+    }
+    /**
+     * 接收消息
+     * @param protocolFactory
+     * @param handler
+     * @return
+     */
+    @Bean
+    public Servlet helloService(TProtocolFactory protocolFactory, HelloServiceHandler handler) {
+        return new TServlet(new Hello.Processor<>(handler), protocolFactory);
     }
 }
