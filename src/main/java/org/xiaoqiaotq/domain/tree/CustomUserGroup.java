@@ -1,5 +1,7 @@
 package org.xiaoqiaotq.domain.tree;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.xiaoqiaotq.domain.User;
 
 import javax.persistence.*;
@@ -11,6 +13,7 @@ import java.util.Set;
  * date  : 2015/5/19.
  */
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class CustomUserGroup extends Node<CustomUserGroup>{
     @Id
     @GeneratedValue

@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -17,11 +14,11 @@ import java.util.Set;
 @MappedSuperclass
 public abstract class Node<T> {
     @ManyToOne
-    @JsonBackReference
     private T parent;
+
     @OneToMany(mappedBy = "parent")
     @OrderBy
-    @JsonManagedReference
+    @JsonIgnore
     private Set<T> children;
 
     public void setParent(T parent) {

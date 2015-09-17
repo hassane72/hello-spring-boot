@@ -10,6 +10,7 @@ import org.xiaoqiaotq.domain.User;
 import org.xiaoqiaotq.domain.tree.CustomUserGroup;
 import org.xiaoqiaotq.repository.CustomUserGroupRepository;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,7 +33,33 @@ public class TreeController {
     }
     @RequestMapping("/load")
     public CustomUserGroup load() {
-
+        customUserGroupRepository.findOne(2l);
+        customUserGroupRepository.findOne(3l);
         return customUserGroupRepository.findOne(1l);
+    }
+    @RequestMapping("/update1")
+    @Transactional
+    public CustomUserGroup update1() {
+
+        CustomUserGroup one = customUserGroupRepository.findOne(1l);
+        one.setGroupName("w");
+        return one;
+    }
+
+    @RequestMapping("/update2")
+    @Transactional
+    public CustomUserGroup update2() {
+
+        CustomUserGroup one = customUserGroupRepository.findOne(2l);
+        one.setGroupName("awsf");
+        return one;
+    }
+    @RequestMapping("/update3")
+    @Transactional
+    public CustomUserGroup update3() {
+
+        CustomUserGroup one = customUserGroupRepository.findOne(3l);
+        one.setGroupName("eeewa");
+        return one;
     }
 }
