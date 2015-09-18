@@ -10,6 +10,7 @@ import org.xiaoqiaotq.domain.ManyToMany.Project;
 import org.xiaoqiaotq.repository.EmployeeRepository;
 import org.xiaoqiaotq.repository.ProjectRepository;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -43,10 +44,12 @@ public class ManyToManyController {
         return  project;
     }
     @RequestMapping("/findProject/{id}")
+    @Transactional
     public Project findOne1(@PathVariable("id") long id){
         System.err.println("hello ");
         Project one = projectRepository.findOne(id);
-        one.getEmployees();
+        Set<Employee> employees = one.getEmployees();
+        employees.forEach((t)->t.setName("llllaaaaa"));
         return one;
     }
     @RequestMapping("/findEmployee/{id}")
