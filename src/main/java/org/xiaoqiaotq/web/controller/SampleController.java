@@ -10,13 +10,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.xiaoqiaotq.Application;
+import org.xiaoqiaotq.domain.AutoDelLogTimeEntity;
 import org.xiaoqiaotq.domain.Book;
 import org.xiaoqiaotq.domain.User;
+import org.xiaoqiaotq.service.AsyncService;
 import org.xiaoqiaotq.web.messageService.Message;
 
 import javax.inject.Inject;
@@ -40,6 +39,9 @@ public class SampleController {
     Book book =new Book("concurrency aa");
     @Autowired
     JavaMailSender javaMailSender;
+
+    @Autowired
+    AsyncService asyncService;
 
     @RequestMapping(value = "/aadda")
     public String hello(){
@@ -92,11 +94,14 @@ public class SampleController {
         System.out.println(atmosphereFramework.metaBroadcaster());
         System.out.println(atmosphereFramework.getBroadcasterFactory());
         Gson gson = new Gson();
+        System.err.println("broa  dcast : " + atmosphereFramework.getBroadcasterFactory().lookupAll());
         Message message=new Message();
         message.setAuthor("zhsandddss");
         message.setMessage("hello faaffffff");
-        atmosphereFramework.metaBroadcaster().broadcastTo("/", gson.toJson(message), true);
-        System.err.println("broa  dcast : " + atmosphereFramework.getBroadcasterFactory().lookupAll());
+//        atmosphereFramework.metaBroadcaster().broadcastTo("/", gson.toJson(message), true);
+        atmosphereFramework.getBroadcasterFactory().lookup("zhsan", true).broadcast(gson.toJson(message));
+        System.err.println("sdfsdaf");
+        System.err.println("sadfsdffdss");
         return book;
 
     }
@@ -138,11 +143,31 @@ public class SampleController {
     }
 
     @RequestMapping("/getApplicationContext")
-    public String getApplicationContext() {
+         public String getApplicationContext() {
         ApplicationContext context = Application.context;
         Object userService = context.getBean("userService");
         System.err.println(context);
         System.err.println(userService);
         return "success";
+    }
+    @RequestMapping("/testAsync")
+    @ResponseBody
+    public String testAsync() {
+        System.err.println("main thread  start "+Thread.currentThread().getName());
+        asyncService.aa();
+        System.err.println("main thread  end "+Thread.currentThread().getName());
+        return "success";
+    }
+    @RequestMapping("/testSchedule")
+    @ResponseBody
+    public String testSchedule() {
+        asyncService.bb();
+        return "success";
+    }
+    @RequestMapping("/saveAutoDelLogTime")
+    @ResponseBody
+    public AutoDelLogTimeEntity saveAutoDelLogTime(AutoDelLogTimeEntity autoDelLogTime) {
+        asyncService.saveAutoDelLogTime(autoDelLogTime);
+        return autoDelLogTime;
     }
 }

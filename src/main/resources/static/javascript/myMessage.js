@@ -3,6 +3,7 @@ $(function() {
 
 	var header = $('#header');
 	var content = $('#content');
+	var $messsage = $('#message');
 	var status = $('#status');
 	var logged = false;
 	var socket = atmosphere;
@@ -52,15 +53,15 @@ $(function() {
 
 	// For demonstration of how you can customize the fallbackTransport using
 	// the onTransportFailure function
-	request.onTransportFailure = function(errorMsg, request) {
+	request.onTransportFailure = function(errorMsg, req) {
 		atmosphere.util.info(errorMsg);
-		request.fallbackTransport = "long-polling";
+		req.fallbackTransport = "long-polling";
 		header
 				.html($(
 						'<h3>',
 						{
 							text : 'Atmosphere Chat. Default transport is WebSocket, fallback is '
-									+ request.fallbackTransport
+									+ req.fallbackTransport
 						}));
 	};
 
@@ -74,6 +75,7 @@ $(function() {
 			return;
 		}
 		console.log(message);
+		$messsage.append(json.author+' : '+json.message+'</br>');
 	};
 
 	request.onClose = function(response) {
@@ -82,7 +84,7 @@ $(function() {
 		}));
 		if (subSocket) {
 			subSocket.push(atmosphere.util.stringifyJSON({
-				author : author,
+				author : "sadf",
 				message : 'disconnecting'
 			}));
 		}

@@ -18,7 +18,7 @@ public class HelloAspect {
 
     @Around("p1()")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
-        System.err.println("-------fffddd--------------");
+        System.err.println("-------i am aspect--------------");
         System.err.println(joinPoint.getSignature());
         Object proceed = joinPoint.proceed();
         return proceed;

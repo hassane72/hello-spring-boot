@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.xiaoqiaotq.service.UserService;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.io.IOException;
 
 @ManagedService(path = "/message/chat")
@@ -21,6 +22,7 @@ public class ChatService {
 	private final Logger logger = LoggerFactory.getLogger(ChatService.class);
 
 	@Inject
+			@Singleton
 	BroadcasterFactory broadcasterFactory;
 
 	@Autowired
@@ -30,8 +32,10 @@ public class ChatService {
 	public void onReady(final AtmosphereResource resource) {
 		System.err.println(this);
 		System.err.println(broadcasterFactory);
-		broadcasterFactory.lookup(DefaultBroadcaster.class,"zhsan", true);
-		this.logger.info("Connected", resource.uuid());
+		DefaultBroadcaster user = broadcasterFactory.lookup(DefaultBroadcaster.class, "zhsan", true);
+//		resource.addBroadcaster(user);
+		user.addAtmosphereResource(resource);
+		this.logger.info("Connected {}", resource.uuid());
 	}
 
 	@Disconnect
