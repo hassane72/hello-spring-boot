@@ -1,9 +1,12 @@
 package org.xiaoqiaotq.service;
 
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -12,6 +15,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class AsyncService {
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+
     @Async
     public void aa(){
         try {
@@ -21,5 +26,9 @@ public class AsyncService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    @Scheduled(fixedRate = 5000)
+    public void time(){
+        System.out.println("The time is now " + dateFormat.format(new Date()));
     }
 }
