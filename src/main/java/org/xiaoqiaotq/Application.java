@@ -24,15 +24,20 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.xiaoqiaotq.cluster.HelloServiceHandler;
+import org.xiaoqiaotq.domain.Iface.Banana;
+import org.xiaoqiaotq.domain.Iface.Fruit;
+import org.xiaoqiaotq.domain.Iface.Orange;
 import org.xiaoqiaotq.web.servlet.MyServlet;
 import org.xiaoqiaotq.web.servlet.SecondServlet;
 import service.demo.Hello;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -106,5 +111,19 @@ public class Application extends SpringBootServletInitializer{
     public BroadcasterFactory broadcasterFactory() {
         AtmosphereFramework framework = (AtmosphereFramework) servletContext.getAttribute("atmosphereServlet");
         return framework.getBroadcasterFactory();
+    }
+    @Bean
+    public Fruit orange34(){
+        return new Orange();
+    }
+    @Bean
+    public Fruit banana2(){
+        return new Banana();
+    }
+    @Autowired
+    List<Fruit> fruitList;
+    @PostConstruct
+    public void init(){
+        System.err.println(fruitList);
     }
 }
