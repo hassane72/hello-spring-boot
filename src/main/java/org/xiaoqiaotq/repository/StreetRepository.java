@@ -9,5 +9,5 @@ import org.xiaoqiaotq.domain.geom.StreetTest;
  * date  : 2015/10/15
  */
 @Repository
-public interface StreetRepository extends JpaRepository<StreetTest,Long> {
+public interface StreetRepository extends JpaRepository<StreetTest,Long>,StreetRepositoryCustom {
 }

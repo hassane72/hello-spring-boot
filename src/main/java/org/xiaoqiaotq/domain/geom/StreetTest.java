@@ -1,5 +1,6 @@
 package org.xiaoqiaotq.domain.geom;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import org.hibernate.annotations.Type;
 import org.xiaoqiaotq.domain.BaseEntity;
@@ -29,6 +30,7 @@ import java.io.Serializable;
 @Entity
 public class StreetTest extends BaseEntity implements Serializable {
 
+    @JsonIgnore
     @Type(type = "org.hibernate.spatial.GeometryType")
     private MultiPolygon geom;//空间数据信息
 

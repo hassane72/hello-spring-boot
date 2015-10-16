@@ -7,9 +7,15 @@ import com.vividsolutions.jts.io.WKTReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.xiaoqiaotq.domain.geom.StreetTest;
 import org.xiaoqiaotq.repository.StreetRepository;
+import org.xiaoqiaotq.service.StreetService;
+
+import java.io.InputStream;
+import java.util.List;
 
 /**
  * author: xiaoqiaotq@gmail.com
@@ -59,5 +65,22 @@ public class PolygonTestController {
     public static void main(String[] args) {
         PolygonTestController sampleController=new PolygonTestController();
         Geometry geometry = sampleController.wktToGeometry(gem);
+    }
+
+    @Autowired
+    private StreetService streetService;
+
+    @RequestMapping("/import")
+    @ResponseBody
+    public  String streetImport(MultipartFile zipFile)throws Exception{
+        InputStream in = zipFile.getInputStream();
+        streetService.importFile(in);
+        return "success";
+    }
+    @RequestMapping("/query")
+    @ResponseBody
+    public List<StreetTest> queryStreet(@RequestParam String citycode){
+        List<StreetTest> streets = streetService.queryStreet(citycode);
+        return streets;
     }
 }
