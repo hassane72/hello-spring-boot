@@ -2,12 +2,14 @@ package org.xiaoqiaotq.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.xiaoqiaotq.domain.User;
+import org.xiaoqiaotq.repository.UserRepository;
 import org.xiaoqiaotq.service.UserService;
 import org.xiaoqiaotq.util.Servlets;
 
@@ -28,6 +30,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
 
     @RequestMapping("/home")
@@ -93,6 +98,15 @@ public class UserController {
         if (id != -1) {
             model.addAttribute("user", userService.find(id));
         }
+    }
+
+    @RequestMapping("/query")
+    @ResponseBody
+    public Page<User> query(@RequestParam(defaultValue = "1") int pageNo,
+                            @RequestParam(defaultValue = "20") int pageSize,
+                            @RequestParam(defaultValue = "") String key){
+        PageRequest pageRequest = new PageRequest(pageNo - 1, pageSize);
+        return  userRepository.findByKeyLike(key, pageRequest);
     }
 }
 

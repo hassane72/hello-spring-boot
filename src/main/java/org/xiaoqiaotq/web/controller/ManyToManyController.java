@@ -49,7 +49,7 @@ public class ManyToManyController {
         System.err.println("hello ");
         Project one = projectRepository.findOne(id);
         Set<Employee> employees = one.getEmployees();
-        employees.forEach((t)->t.setName("llllaaaaa"));
+        employees.forEach((t) -> t.setName("llllaaaaa"));
         return one;
     }
     @RequestMapping("/findEmployee/{id}")
@@ -60,5 +60,15 @@ public class ManyToManyController {
         System.err.println(exitsName);
         return one;
     }
+    @RequestMapping("/testSet")
+    @Transactional
+    public Project testSet(){
+        System.err.println("hello ");
+        Project one = projectRepository.findOne(3l);
+        one.setName("dsfasdf");
+        projectRepository.save(one);
+        return one;
+    }
+
 
 }

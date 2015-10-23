@@ -5,6 +5,7 @@ import org.xiaoqiaotq.domain.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Version;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ import java.util.Set;
 @Entity
 public class Project extends BaseEntity {
     private String name;
+
     @ManyToMany
     @JsonManagedReference
     private Set<Employee> employees=new HashSet<>();

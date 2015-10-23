@@ -23,4 +23,7 @@ public interface UserRepository extends JpaSpecificationExecutor<User>,PagingAnd
 	@Modifying
 	@Query("update User u set u.pass=?1 where u.id=?2")
 	int resetPass(String newPass, Long uid);
+
+	@Query("select a from User a where a.username like %:keyp% or a.pass like  %:keyp%  or a.photo  like %:keyp% ")
+	Page<User> findByKeyLike(@Param("keyp")String key, Pageable pageable);
 }

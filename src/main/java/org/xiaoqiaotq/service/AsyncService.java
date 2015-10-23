@@ -1,5 +1,6 @@
 package org.xiaoqiaotq.service;
 
+import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -8,6 +9,7 @@ import org.springframework.util.StopWatch;
 import org.xiaoqiaotq.domain.AutoDelLogTimeEntity;
 import org.xiaoqiaotq.repository.AutoDelLogTimeRepository;
 
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -17,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * date  : 2015/9/16
  */
 @Service
-public class AsyncService {
+public class AsyncService  {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
     @Autowired

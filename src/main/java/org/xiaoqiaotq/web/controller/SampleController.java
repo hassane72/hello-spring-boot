@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.xiaoqiaotq.Application;
 import org.xiaoqiaotq.domain.AutoDelLogTimeEntity;
 import org.xiaoqiaotq.domain.Book;
+import org.xiaoqiaotq.domain.ManyToMany.Project;
 import org.xiaoqiaotq.domain.User;
+import org.xiaoqiaotq.repository.ProjectRepository;
 import org.xiaoqiaotq.service.AsyncService;
 import org.xiaoqiaotq.web.messageService.Message;
 
@@ -23,6 +25,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.io.File;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -170,4 +173,5 @@ public class SampleController {
         asyncService.saveAutoDelLogTime(autoDelLogTime);
         return autoDelLogTime;
     }
+
 }

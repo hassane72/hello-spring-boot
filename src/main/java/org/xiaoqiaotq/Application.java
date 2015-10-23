@@ -19,8 +19,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.xiaoqiaotq.cluster.HelloServiceHandler;
@@ -125,5 +127,12 @@ public class Application extends SpringBootServletInitializer{
     @PostConstruct
     public void init(){
         System.err.println(fruitList);
+    }
+
+    @Bean
+    public TaskExecutor dsf(){
+        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+        threadPoolTaskExecutor.setCorePoolSize(4);
+        return  threadPoolTaskExecutor;
     }
 }
