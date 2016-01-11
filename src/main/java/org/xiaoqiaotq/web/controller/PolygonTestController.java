@@ -62,10 +62,10 @@ public class PolygonTestController {
         return geom;
     }
 
-    public static void main(String[] args) {
-        PolygonTestController sampleController=new PolygonTestController();
-        Geometry geometry = sampleController.wktToGeometry(gem);
-    }
+//    public static void main(String[] args) {
+//        PolygonTestController sampleController=new PolygonTestController();
+//        Geometry geometry = sampleController.wktToGeometry(gem);
+//    }
 
     @Autowired
     private StreetService streetService;

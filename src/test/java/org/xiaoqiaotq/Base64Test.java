@@ -21,6 +21,7 @@ public class Base64Test {
     @Test
     public void test2() throws Exception {
         String test="打发打发aaaa";
+        System.err.println(test);
         String gb18030 = new String(test.getBytes("gb18030"), "utf-8");
         System.err.println(gb18030);
     }

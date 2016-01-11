@@ -23,7 +23,6 @@ import org.geotools.referencing.crs.DefaultGeographicCRS;
 import org.opengis.feature.Property;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
-import org.xiaoqiaotq.domain.geom.StreetTest;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -185,24 +184,24 @@ public final class ShapeFileUtil {
     /**
      * 写shape文件，以point为例
      */
-    public static void main(String[] args) throws Exception {
-
-
-        /*****************************数据输出测试方法*************************/
-
-
-        /*************************************shp数据读取********************************/
-//        readSHP("C:\\Users\\Caocui\\Desktop\\BD\\DD\\dandong.shp");
-
-        /*************************************dbf数据读取********************************/
-//        readDBF("C:\\Users\\Caocui\\Desktop\\BD\\DD\\dandong.dbf");
-//        List list = readSHP(new File("C:\\Users\\wang\\Documents\\Tencent Files\\843036893\\FileRecv\\迪卡侬模板数据20151014\\街道\\街道导出\\streetcut_002001.shp1"));
-        ShapeFileUtil shapeFileUtil=new ShapeFileUtil();
-        String zipname = "C:\\Users\\wang\\Documents\\Tencent Files\\843036893\\FileRecv\\迪卡侬模板数据20151014\\街道\\街道导出\\streetExport.zip";
-        FileInputStream in = new FileInputStream(zipname);
-        List list = shapeFileUtil.importSpatialStream(in, StreetTest.class);
-        System.err.println(list);
-    }
+//    public static void main(String[] args) throws Exception {
+//
+//
+//        /*****************************数据输出测试方法*************************/
+//
+//
+//        /*************************************shp数据读取********************************/
+////        readSHP("C:\\Users\\Caocui\\Desktop\\BD\\DD\\dandong.shp");
+//
+//        /*************************************dbf数据读取********************************/
+////        readDBF("C:\\Users\\Caocui\\Desktop\\BD\\DD\\dandong.dbf");
+////        List list = readSHP(new File("C:\\Users\\wang\\Documents\\Tencent Files\\843036893\\FileRecv\\迪卡侬模板数据20151014\\街道\\街道导出\\streetcut_002001.shp1"));
+//        ShapeFileUtil shapeFileUtil=new ShapeFileUtil();
+//        String zipname = "C:\\Users\\wang\\Documents\\Tencent Files\\843036893\\FileRecv\\迪卡侬模板数据20151014\\街道\\街道导出\\streetExport.zip";
+//        FileInputStream in = new FileInputStream(zipname);
+//        List list = shapeFileUtil.importSpatialStream(in, StreetTest.class);
+//        System.err.println(list);
+//    }
 
     /**
      * 导入空间数据

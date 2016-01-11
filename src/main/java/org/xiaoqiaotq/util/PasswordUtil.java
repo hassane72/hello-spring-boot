@@ -43,8 +43,8 @@ public final class PasswordUtil
     }
     return hex.toString();
   }
-  public static void main(String[] args) {
-    String dsfsdaf = PasswordUtil.encrypt("admin");
-    System.err.println(dsfsdaf);
-  }
+//  public static void main(String[] args) {
+//    String dsfsdaf = PasswordUtil.encrypt("admin");
+//    System.err.println(dsfsdaf);
+//  }
 }
