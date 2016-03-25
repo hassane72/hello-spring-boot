@@ -3,28 +3,23 @@ package org.xiaoqiaotq;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocolFactory;
 import org.apache.thrift.server.TServlet;
-import org.atmosphere.cpr.*;
+import org.atmosphere.cpr.AtmosphereServlet;
+import org.atmosphere.cpr.BroadcasterFactory;
+import org.atmosphere.cpr.ContainerInitializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
-import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
-import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.xiaoqiaotq.cluster.HelloServiceHandler;
 import org.xiaoqiaotq.domain.Iface.Banana;
 import org.xiaoqiaotq.domain.Iface.Fruit;
@@ -111,8 +106,9 @@ public class Application extends SpringBootServletInitializer{
 
     @Bean
     public BroadcasterFactory broadcasterFactory() {
-        AtmosphereFramework framework = (AtmosphereFramework) servletContext.getAttribute("atmosphereServlet");
-        return framework.getBroadcasterFactory();
+//        AtmosphereFramework framework = (AtmosphereFramework) servletContext.getAttribute("atmosphereServlet");
+//        return framework.getBroadcasterFactory();
+        return null;
     }
     @Bean
     public Fruit orange34(){
@@ -135,4 +131,13 @@ public class Application extends SpringBootServletInitializer{
         threadPoolTaskExecutor.setCorePoolSize(4);
         return  threadPoolTaskExecutor;
     }
+//    @Bean
+//    public FilterRegistrationBean filterRegistrationBean() {
+//        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+//        WordsFilter wordsFilter = new WordsFilter();
+//        registrationBean.setFilter(wordsFilter);
+//        registrationBean.setOrder(Integer.MIN_VALUE);
+//        registrationBean.addUrlPatterns("/*");
+//        return registrationBean;
+//    }
 }

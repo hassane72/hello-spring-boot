@@ -2,7 +2,6 @@ package org.xiaoqiaotq.web.controller;
 
 import com.google.gson.Gson;
 import org.atmosphere.cpr.AtmosphereFramework;
-import org.atmosphere.cpr.AtmosphereServlet;
 import org.atmosphere.cpr.BroadcasterFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,21 +13,17 @@ import org.springframework.web.bind.annotation.*;
 import org.xiaoqiaotq.Application;
 import org.xiaoqiaotq.domain.AutoDelLogTimeEntity;
 import org.xiaoqiaotq.domain.Book;
-import org.xiaoqiaotq.domain.ManyToMany.Project;
 import org.xiaoqiaotq.domain.User;
-import org.xiaoqiaotq.repository.ProjectRepository;
 import org.xiaoqiaotq.service.AsyncService;
 import org.xiaoqiaotq.web.messageService.Message;
 
-import javax.inject.Inject;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 import java.io.File;
-import java.util.Collection;
 import java.util.Enumeration;
+import java.util.Map;
 
 /**
  * Created by wang on 2015/4/21.
@@ -172,6 +167,16 @@ public class SampleController {
     public AutoDelLogTimeEntity saveAutoDelLogTime(AutoDelLogTimeEntity autoDelLogTime) {
         asyncService.saveAutoDelLogTime(autoDelLogTime);
         return autoDelLogTime;
+    }
+    @RequestMapping("/wordFilterTest")
+    @ResponseBody
+    public String wordFilter(String words,HttpServletRequest request,@RequestParam Map map) {
+        String aa = request.getParameter("aa");
+        String[] bb = request.getParameterValues("bb");
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        System.err.println(aa);
+        System.err.println(words);
+        return words;
     }
 
 }

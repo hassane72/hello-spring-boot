@@ -3,19 +3,19 @@ package org.xiaoqiaotq;
 import org.junit.Test;
 import org.xiaoqiaotq.domain.Book;
 
-import java.io.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * author: xiaoqiaotq@gmail.com
  * date  : 2015/10/14
  */
-public class OptionalTest {
+public class OptionalTest <T>{
     @Test
     public void test() throws Exception {
         Book book = new Book();
@@ -40,5 +40,16 @@ public class OptionalTest {
         Collections.sort(integers);
         System.err.println(integers);
         System.err.println(integers.equals(integers2));
+    }
+    @Test
+    public void test4() throws Exception {
+
+    }
+    private  Stream<T> stream;
+    public <T,R>  Stream<R> map(Function<T,R> function){
+        return null;
+    }
+    public <T,R>  Stream<R> filter(Predicate<T> predicate){
+        return null;
     }
 }
