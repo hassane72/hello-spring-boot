@@ -26,5 +26,15 @@ pipeline {
         }
       }
     }
+    stage('test') {
+      steps {
+        echo 'test........'
+      }
+    }
+    stage('deploy') {
+      steps {
+        mail(subject: 'subjeeeeeee', body: 'bnody111111', to: 'xiaoqiaotq@gmail.com')
+      }
+    }
   }
 }
